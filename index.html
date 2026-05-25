@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Traffic Prediction Portal</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Smart Traffic Prediction System</h1>
+
+    <form action="/predict" method="POST">
+
+        <input type="number"
+               name="hour"
+               placeholder="Enter Hour (0-23)"
+               required>
+
+        <input type="text"
+               name="lat"
+               placeholder="Latitude"
+               required>
+
+        <input type="text"
+               name="long"
+               placeholder="Longitude"
+               required>
+
+        <select name="alert">
+
+            <option value="cas_ldw">
+                Lane Departure Warning
+            </option>
+
+            <option value="cas_fcw">
+                Forward Collision Warning
+            </option>
+
+            <option value="cas_pcw">
+                Pedestrian Collision Warning
+            </option>
+
+            <option value="cas_hmw">
+                Headway Monitoring Warning
+            </option>
+
+            <option value="cas_bsw">
+                Blind Spot Warning
+            </option>
+
+        </select>
+
+        <input type="text"
+               name="speed"
+               placeholder="Vehicle Speed"
+               required>
+
+        <button type="submit">
+            Predict Traffic
+        </button>
+
+    </form>
+
+    {% if prediction %}
+
+    <div class="result">
+
+        <h2>
+            Traffic Level: {{ prediction }}
+        </h2>
+
+        <h3>
+            {{ suggestion }}
+        </h3>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
